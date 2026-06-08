@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Study Planner</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;800&family=DM+Sans:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- HEADER -->
+    <header>
+      <div class="header-inner">
+        <div class="logo">📚 StudyPlanner</div>
+        <nav>
+          <button class="nav-btn active" onclick="showSection('todo')">
+            To-Do List
+          </button>
+          <button class="nav-btn" onclick="showSection('topics')">
+            My Topics
+          </button>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <!-- ===== TO-DO SECTION ===== -->
+      <section id="todo" class="section active">
+        <div class="section-header">
+          <h1>📝 To-Do List</h1>
+          <p>Keep track of your daily study tasks</p>
+        </div>
+
+        <!-- Add Task Form -->
+        <div class="card add-card">
+          <input
+            type="text"
+            id="taskInput"
+            placeholder="e.g. Revise Chapter 3 – Trigonometry"
+          />
+          <div class="row gap">
+            <input type="date" id="taskDate" />
+            <select id="taskPriority">
+              <option value="high">🔴 High Priority</option>
+              <option value="medium" selected>🟡 Medium Priority</option>
+              <option value="low">🟢 Low Priority</option>
+            </select>
+            <button class="btn primary" onclick="addTask()">+ Add Task</button>
+          </div>
+        </div>
+
+        <!-- Filter Bar -->
+        <div class="filter-bar">
+          <button class="filter-btn active" onclick="filterTasks('all', this)">
+            All
+          </button>
+          <button class="filter-btn" onclick="filterTasks('pending', this)">
+            Pending
+          </button>
+          <button class="filter-btn" onclick="filterTasks('done', this)">
+            Completed
+          </button>
+          <button class="filter-btn danger" onclick="clearCompleted()">
+            🗑 Clear Completed
+          </button>
+        </div>
+
+        <!-- Task List -->
+        <div id="taskList" class="task-list">
+          <!-- tasks injected here -->
+        </div>
+        <div id="emptyTodo" class="empty-state">
+          <span>🎯</span>
+          <p>No tasks yet! Add something to get started.</p>
+        </div>
+      </section>
+
+      <!-- ===== TOPICS SECTION ===== -->
+      <section id="topics" class="section">
+        <div class="section-header">
+          <h1>🧠 My Topics</h1>
+          <p>Know your strengths and work on your weaknesses</p>
+        </div>
+
+        <!-- Add Topic Form -->
+        <div class="card add-card">
+          <input
+            type="text"
+            id="topicInput"
+            placeholder="e.g. Integration, Newton's Laws, Organic Chemistry..."
+          />
+          <div class="row gap">
+            <input
+              type="text"
+              id="topicSubject"
+              placeholder="Subject (e.g. Maths, Physics)"
+            />
+            <div class="toggle-group">
+              <button
+                class="toggle-btn weak active"
+                id="weakBtn"
+                onclick="selectStrength('weak')"
+              >
+                😰 Weak
+              </button>
+              <button
+                class="toggle-btn strong"
+                id="strongBtn"
+                onclick="selectStrength('strong')"
+              >
+                💪 Strong
+              </button>
+            </div>
+            <button class="btn primary" onclick="addTopic()">
+              + Add Topic
+            </button>
+          </div>
+        </div>
+
+        <!-- Topics Grid -->
+        <div class="topics-columns">
+          <!-- Weak Topics -->
+          <div class="topic-column weak-col">
+            <div class="col-header weak-header">
+              <span>😰 Weak Topics</span>
+              <span class="count-badge weak-badge" id="weakCount">0</span>
+            </div>
+            <div id="weakList" class="topic-list">
+              <!-- weak topics here -->
+            </div>
+            <div id="emptyWeak" class="empty-state small">
+              <span>✅</span>
+              <p>No weak topics! Great job.</p>
+            </div>
+          </div>
+
+          <!-- Strong Topics -->
+          <div class="topic-column strong-col">
+            <div class="col-header strong-header">
+              <span>💪 Strong Topics</span>
+              <span class="count-badge strong-badge" id="strongCount">0</span>
+            </div>
+            <div id="strongList" class="topic-list">
+              <!-- strong topics here -->
+            </div>
+            <div id="emptyStrong" class="empty-state small">
+              <span>📖</span>
+              <p>Add topics you've mastered!</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
