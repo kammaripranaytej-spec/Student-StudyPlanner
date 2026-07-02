@@ -1,10 +1,3 @@
-// =============================================
-//  STUDY PLANNER - app.js
-//  Plain JavaScript, no frameworks needed!
-// =============================================
-
-// ---------- DATA (saved in browser storage) ----------
-
 function loadData(key, fallback) {
   try {
     return JSON.parse(localStorage.getItem(key)) || fallback;
